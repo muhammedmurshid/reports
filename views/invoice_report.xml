@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<!--    <record id="invoice_report_form_view" model="ir.ui.view">-->
+<!--        <field name="name">invoice.report</field>-->
+<!--        <field name="model">invoice.report</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Example Form">-->
+<!--                <header>-->
+<!--                    <field name="state" widget="statusbar"/>-->
+<!--                    <button name="act_submit" type="object" class="oe_highlight" invisible="state != 'filtered'"-->
+<!--                            string="Sent to Lead"/>-->
+<!--                    <button name="action_add_to_duplicates" type="object" string="Verify and Filter"-->
+<!--                            style="background-color: #ff6d4d" invisible="state != 'draft'"/>-->
+<!--                    <button name="act_return_to_draft" type="object" invisible="state in ['done','leads_assigned','draft']"-->
+<!--                            string="Return to Draft"/>-->
+<!--                    <button name="action_bulk_lead_assign" type="object" string="Bulk Lead Assign"-->
+<!--                            invisible="state in ['draft','filtered','leads_assigned']"-->
+<!--                            groups="custom_leads.group_lead_team_lead"/>-->
+<!--                </header>-->
+<!--                <sheet>-->
+<!--                    <style>-->
+<!--                        .custom-field-name {-->
+<!--                        color: #cbf542 ;-->
+<!--                        }-->
+<!--                    </style>-->
+<!--                    <div name="button_box" position="inside">-->
+<!--                        <button class="oe_stat_button" type="object" name="get_current_leads" icon="fa-book">-->
+<!--                            <field string="Leads" name="leads_smart_count" widget="statinfo"/>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;                    <div name="button_box" class="oe_button_box">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        &ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                    <group>-->
+<!--                        <group readonly="state != 'draft'">-->
+<!--                            <field name="lead_source_id" style="background-color:#fae7e3;" readonly="state != 'draft'"/>-->
+<!--                            <field name="lead_source_name" invisible="1" readonly="state != 'draft'"/>-->
+<!--                            <field name="date" style="background-color:#fae7e3;" readonly="state != 'draft'"/>-->
+<!--                            <field name="district" required="lead_source_name == 'Seminar'" style="background-color:#fae7e3;" readonly="state != 'draft'"/>-->
+<!--                            <field name="academic_year" style="background-color:#fae7e3;" readonly="state != 'draft'"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="institute_name" style="background-color:#fae7e3;"-->
+<!--                                   invisible="lead_source_name != 'Seminar'" readonly="state != 'draft'"/>-->
+<!--&lt;!&ndash;                            <field name="title"/>&ndash;&gt;-->
+<!--                            <field name="stream" readonly="state != 'draft'"/>-->
+<!--                            <field name="booked_by" invisible="lead_source_name != 'Seminar'"-->
+<!--                                   style="background-color:#fae7e3;" readonly="state != 'draft'"/>-->
+<!--                            <field name="attended_by" invisible="lead_source_name != 'Seminar'"-->
+<!--                                   style="background-color:#fae7e3;" readonly="state != 'draft'"/>-->
+<!--                            <field name="incentive" groups="base.group_no_one"/>-->
+<!--                            <field name="bulk_lead_assign" groups="base.group_no_one"/>-->
+<!--                            <field name="incentive_booked" invisible="1"/>-->
+<!--                            <field name="incentive_attended" invisible="1"/>-->
+
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <notebook>-->
+<!--                        <page string="Students List" name="students">-->
+<!--                            <field name="students_ids" readonly="state != 'draft'">-->
+<!--                                <tree string="Students List" editable="bottom">-->
+<!--                                    <field name="student_name" style="background:#fac17f;"/>-->
+
+<!--                                    <field name="contact_number" widget="phone" style="background:#fac17f;"/>-->
+
+<!--                                    <field name="whatsapp_number" widget="phone"/>-->
+<!--                                    <field name="preferred_course"/>-->
+<!--                                    <field name="parent_number" widget="phone"/>-->
+<!--                                    <field name="email_address" widget="mail"/>-->
+<!--                                    <field name="place"/>-->
+<!--                                    &lt;!&ndash;                                    <field name="seminar_id" invisible="1"/>&ndash;&gt;-->
+
+<!--                                    &lt;!&ndash;                                    <field name="last_call_by" invisible="state != 'done'"/>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                    <field name="date_of_call" invisible="state != 'done'"/>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                    <field name="last_call_remarks" invisible="state != 'done'"/>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                    <field name="admission_by" invisible="state != 'done'"/>&ndash;&gt;-->
+<!--                                    <field name="admission_status" invisible="state != 'done'"/>-->
+<!--                                    <field name="admission_date" invisible="state != 'done'"/>-->
+<!--                                    <field name="state" invisible="1"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                            <div>-->
+<!--                                <h5 align="right">-->
+<!--                                    <label for="child_count"/>:-->
+<!--                                    <field name="child_count"/>-->
+<!--                                </h5>-->
+<!--                            </div>-->
+<!--                        </page>-->
+<!--                        <page string="Duplicates" name="duplicates">-->
+<!--                            <field name="seminar_duplicate_ids">-->
+<!--                                <tree string="Duplicates" editable="bottom">-->
+<!--                                    <field name="student_name"/>-->
+<!--                                    <field name="preferred_course"/>-->
+<!--                                    <field name="contact_number" widget="phone"/>-->
+<!--                                    <field name="whatsapp_number" widget="phone"/>-->
+<!--                                    <field name="parent_number" widget="phone"/>-->
+<!--                                    <field name="email_address" widget="mail"/>-->
+<!--                                    <field name="district"/>-->
+<!--                                    <field name="place"/>-->
+<!--                                    <field name="selected_lead" readonly="1"/>-->
+<!--                                    <field name="admission_status"/>-->
+<!--                                    &lt;!&ndash;                                    <field name="incentive"/>&ndash;&gt;-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                            <group class="oe_subtotal_footer oe_right">-->
+<!--                                <group>-->
+<!--                                    &lt;!&ndash;                                    <field name="count_duplicate"/>&ndash;&gt;-->
+<!--                                    &lt;!&ndash;                                    <field name="selected_duplicates_count"/>&ndash;&gt;-->
+<!--                                </group>-->
+<!--                            </group>-->
+
+<!--                        </page>-->
+<!--                    </notebook>-->
+<!--                </sheet>-->
+<!--                <div class="oe_chatter">-->
+<!--                    <field name="message_follower_ids"-->
+<!--                           widget="mail_followers"/>-->
+<!--                    <field name="activity_ids" widget="mail_activity"/>-->
+<!--                    <field name="message_ids" widget="mail_thread"/>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+    <record id="invoice_report_tree_view" model="ir.ui.view">
+        <field name="name">invoice.report.tree</field>
+        <field name="model">invoice.reports</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="invoice_number"/>
+                <field name="branch"/>
+                <field name="date"/>
+                <field name="fee_type"/>
+                <field name="reference_no"/>
+                <field name="amount_inc_tax"/>
+                <field name="fee_collected_by"/>
+                <field name="lead_id" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="invoice_report_action" model="ir.actions.act_window">
+        <field name="name">Invoice Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoice.reports</field>
+        <field name="view_mode">tree</field>
+
+    </record>
+    <!--Menu Item for the model Dashboard Blocks-->
+    <menuitem name="Reports" id="reports_main_view"
+              web_icon="reports,static/description/icon.png"
+              sequence="1" action="invoice_report_action"/>
+    <menuitem name="Invoice Report" id="invoice_reports_menu"
+              parent="reports_main_view"
+              sequence="1" action="invoice_report_action"/>
+</odoo>

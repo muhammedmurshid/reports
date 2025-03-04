@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_invoice_report_accounts,access_invoice_report_accounts,model_invoice_reports,openeducat_core.group_op_accounts,1,1,1,1
+access_invoice_report_admin,access_invoice_report_admin,model_invoice_reports,openeducat_core.group_op_back_office_admin,1,1,1,1

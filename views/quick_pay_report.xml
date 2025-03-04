@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_redirect_quick_pay_report" model="ir.actions.server">
+        <field name="name">Quick Pay Report</field>
+        <field name="model_id" ref="base.model_ir_actions_server"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+            'type': 'ir.actions.act_window',
+            'name': 'Quick Pay',
+            'view_mode': 'tree',
+            'res_model': 'fee.quick.pay',
+            'target': 'current',
+            }
+        </field>
+    </record>
+
+    <menuitem name="Quick Pay" id="menu_quick_pay_report"
+              action="action_redirect_quick_pay_report"
+              parent="reports_main_view"
+              sequence="2"/>
+</odoo>
