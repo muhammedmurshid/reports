@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="lead_admission_report" model="ir.ui.view">
+        <field name="name">crm.lead.form.reporting</field>
+        <field name="model">leads.logic</field>
+        <field name="inherit_id" ref="custom_leads.form_view_leads_logic"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone_number']" position="after">
+                <field name="report" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_students_payment_history_receipt" model="ir.actions.report">
+        <field name="name">Receipt</field>
+        <field name="model">invoice.reports</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">reports.report_receipt_payment_history</field>
+        <field name="report_file">reports.report_receipt_payment_history</field>
+        <field name="print_report_name">'Payment Report - %s' % (object.fee_type)</field>
+        <field name="binding_model_id" ref="reports.model_invoice_reports"/>
+        <field name="binding_type">report</field>
+    </record>
+    <template id="report_receipt_payment_history">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <div class="page">
+                        <div class="text-middle" style="text-align:center;">
+                            <h4>Invoice cum Receipt</h4>
+                            <h6>Original Copy</h6>
+                        </div>
+                    </div>
+                    <style type="text/css">
+                        .table_head_border {
+                        text-align : center;
+                        vertical-align: middle;
+                        border-top: 1px solid black;
+                        border-bottom: 1px solid black;
+                        border-right: 1px solid black;
+                        border-left: 1px solid black;
+                        }
+                        .table_value_border {
+                        vertical-align: middle;
+                        border-top: 1px solid black;
+                        border-bottom: 1px solid black;
+                        border-right: 1px solid black;
+                        border-left: 1px solid black;
+                        }
+                        .total_border{
+                        vertical-align: middle;
+                        border-right: 1px solid black;
+                        border-left: 1px solid black;
+                        border-top: 1px solid black;
+                        border-bottom: 1px solid black;
+                        }
+                    </style>
+                    <div class="page">
+                        <table width="100%">
+                            <tr>
+                                <td>
+                                    <!--                                    <img t-att-src="doc.company_id.logo and 'data:image/png;base64,%s' % to_text(doc.company_id.logo) or '/path/to/default/image.png'"-->
+                                    <!--                                         style="width:30%; max-height:150pt;max-width:100pt;"/>-->
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <!--                                    <span t-field="doc.company_id.partner_id"-->
+                                    <!--                                          t-options='{"widget": "contact", "fields": ["name", "address", "phone", "acc_number", "vat"], "no_marker": True}'/>-->
+
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+                    <!--                                </table>-->
+                    <br></br>
+                    <br></br>
+                    <table align="left" width="50%">
+                        <tr align="left">
+                            <td>
+                                <strong>Date</strong>
+                                <!--                                        </td>-->
+                                <!--                                        <td>-->
+
+                            </td>
+                            <td align="left">:&amp;nbsp;
+                                <span t-field="doc.date"/>
+                            </td>
+                        </tr>
+                        <tr align="left">
+                            <td>
+                                <strong>Invoice No</strong>
+                                <!--                                        </td>-->
+                                <!--                                        <td>-->
+
+                            </td>
+                            <td align="left">:&amp;nbsp;
+                                <span t-field="doc.invoice_number"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <strong>Billed To</strong>
+                            </td>
+                            <td>:&amp;nbsp;</td>
+                            <td align="right">
+                                <span>
+                                    <strong>Payment Mode</strong>
+                                </span>
+                            </td>
+                            <td align="left">:&amp;nbsp;
+                                <span t-field="doc.payment_mode"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top:10px;">
+                                <strong>Name</strong>
+                            </td>
+                            <td>:&amp;nbsp;
+                                <span t-field="doc.name"/>
+                            </td>
+                            <td align="right">
+                                <span>
+                                    <strong>Cheque No/Reference No</strong>
+                                </span>
+                            </td>
+                            <td>:&amp;nbsp;
+                                <span t-field="doc.cheque_no"/>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="padding-top:10px;">
+                                <span>
+                                    <strong>Batch</strong>
+                                </span>
+                            </td>
+
+                            <td>:&amp;nbsp;
+                                <span t-field="doc.batch"/>
+                            </td>
+
+                            <td align="right">
+                                <span>
+                                    <strong>Course</strong>
+                                </span>
+                            </td>
+                            <td>:&amp;nbsp;
+                                <span t-field="doc.student_id.course_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top:10px;">
+                                <span>
+                                    <strong>Branch</strong>
+                                </span>
+                            </td>
+
+                            <td>:&amp;nbsp;
+                                <span t-field="doc.student_id.branch_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top:10px;">
+                                <span>
+                                    <strong>Address</strong>
+                                </span>
+                            </td>
+                            <td>:&amp;nbsp;
+                                <!--                                <span t-field="doc.name.street"/>-->
+                            </td>
+                            <td align="right">
+                                <span>
+                                    <strong>Admission No</strong>
+                                </span>
+                            </td>
+                            <td>:&amp;nbsp;
+                                <span t-field="doc.student_id.gr_no"/>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="padding-top:10px;">
+                                <span>
+                                    <strong>State</strong>
+                                </span>
+                                <td>:&amp;nbsp;
+                                    <!--                                    <span t-field="doc.name.state"/>-->
+                                </td>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <br></br>
+
+                    <table width="100%">
+                        <tr>
+                            <td class="table_value_border" rowspan="2" align="center">Sl No</td>
+                            <td class="table_value_border" rowspan="2" align="center">Fee Name</td>
+                            <td class="table_value_border" align="center">Codes</td>
+                            <td class="table_value_border" rowspan="2" align="center">Taxable Amount</td>
+                            <td class="table_value_border" align="center">CGST</td>
+                            <td class="table_value_border" align="center">SGST</td>
+                            <td class="table_value_border" rowspan="2" align="center">Total Amount</td>
+                        </tr>
+                        <tr>
+                            <td class="table_value_border" align="center">HSN/SAC</td>
+                            <td class="table_value_border" align="center">Amount</td>
+                            <td class="table_value_border" align="center">Amount</td>
+                        </tr>
+                        <t t-set="sl_no" t-value="0"/>
+                        <t t-set="sl_no" t-value="sl_no + 1"/>
+                        <tr>
+                            <td style="padding-left:14px;" class="table_value_border">
+                                <span t-esc="sl_no"/>
+                            </td>
+                            <td align="center" class="table_value_border">
+                                <span t-esc="doc.fee_type"/>
+                            </td>
+                            <td align="center" class="table_value_border">
+                                <span>999293</span>
+                            </td>
+                            <td align="center" class="table_value_border">
+                                <span t-esc="'₹ ' + str(doc.amount_inc_tax)"/>
+                            </td>
+                            <td align="center" class="table_value_border">
+                                <span t-esc="'₹ ' + str(doc.cgst_amount)"/>
+                            </td>
+                            <td align="center" class="table_value_border">
+                                <span t-esc="'₹ ' + str(doc.sgst_amount)"/>
+                            </td>
+                            <td align="center" class="table_value_border">
+                                <span t-esc="'₹ ' + str(doc.amount_inc_tax)"/>
+                            </td>
+                        </tr>
+                        <!--                        <tr>-->
+                        <!--                            <td style="padding-left:14px" class="table_value_border" colspan="4">Total</td>-->
+                        <!--                            <td class="table_value_border" align="center" rowspan="2">-->
+                        <!--                                <span t-esc="doc.cgst_amount"/>-->
+                        <!--                            </td>-->
+                        <!--                            <td class="table_value_border" align="center">-->
+                        <!--                                <span t-esc="doc.sgst_amount"/>-->
+                        <!--                            </td>-->
+                        <!--                            <td class="table_value_border" align="center">-->
+                        <!--                                <span t-esc="doc.amount_inc_tax"/>-->
+                        <!--                            </td>-->
+                        <!--                        </tr>-->
+                        <tr>
+                            <td>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:14px" class="table_value_border" colspan="3">
+                                Total Amount Received in Words:
+                            </td>
+                            <td class="table_value_border" colspan="4">
+                                <span t-esc="doc.amount_in_words"/>
+                                <!-- Add the logic for total amount in words here -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                Cheque Payment subject to realization Only and Fees Once Paid will not be refunded.
+                            </td>
+                        </tr>
+                    </table>
+
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+
+                    <table>
+                        <tr>
+                            <td>Sd/-</td>
+                        </tr>
+                        <tr>
+                            <td>Accountant</td>
+                        </tr>
+                        <tr>
+                            <td>For,
+                                <!--                                <span t-field="doc.company_id.name"/>-->
+                            </td>
+                        </tr>
+                        <!--                            <tr>-->
+                        <!--                                <td>-->
+                        <!--                                    Mob:-->
+                        <!--                                    <span t-field="doc.company_id.phone"/>-->
+                        <!--                                </td>-->
+
+                        <!--                            </tr>-->
+                    </table>
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

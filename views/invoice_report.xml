@@ -131,11 +131,16 @@
                 <field name="invoice_number"/>
                 <field name="branch"/>
                 <field name="date"/>
+                <field name="payment_mode"/>
                 <field name="fee_type"/>
                 <field name="reference_no"/>
+                <field name="cheque_no"/>
+                <field name="batch"/>
                 <field name="amount_inc_tax"/>
                 <field name="fee_collected_by"/>
                 <field name="lead_id" optional="hide"/>
+                <field name="student_id" optional="hide"/>
+                <button name="act_print_invoice" type="object" class="fa fa-download"/>
             </tree>
         </field>
     </record>
