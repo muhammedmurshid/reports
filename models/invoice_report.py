@@ -25,6 +25,8 @@ class InvoiceReports(models.Model):
     cgst_amount = fields.Float(string="Cgst")
     sgst_amount = fields.Float(string="Sgst")
     amount_in_words = fields.Char(string="Amount in Words", compute="_compute_amount_in_words", store=1)
+    company_id = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
+
 
     @api.depends('amount_inc_tax')
     def _compute_amount_in_words(self):

@@ -48,16 +48,21 @@
                         <table width="100%">
                             <tr>
                                 <td>
-                                    <!--                                    <img t-att-src="doc.company_id.logo and 'data:image/png;base64,%s' % to_text(doc.company_id.logo) or '/path/to/default/image.png'"-->
-                                    <!--                                         style="width:30%; max-height:150pt;max-width:100pt;"/>-->
-
+                                    <t t-if="doc.company_id.logo">
+                                        <img t-att-src="'data:image/png;base64,%s' % doc.company_id.logo"
+                                             style="width:30%; max-height:150pt; max-width:100pt;"/>
+                                    </t>
+                                    <t t-else="">
+                                        <img t-att-src="'/path/to/default/image.png'"
+                                             style="width:30%; max-height:150pt; max-width:100pt;"/>
+                                    </t>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>
-                                    <!--                                    <span t-field="doc.company_id.partner_id"-->
-                                    <!--                                          t-options='{"widget": "contact", "fields": ["name", "address", "phone", "acc_number", "vat"], "no_marker": True}'/>-->
+                                    <span t-field="doc.company_id.partner_id"
+                                          t-options='{"widget": "contact", "fields": ["name", "address", "phone", "acc_number", "vat"], "no_marker": True}'/>
 
                                 </td>
 
@@ -166,7 +171,7 @@
                                 </span>
                             </td>
                             <td>:&amp;nbsp;
-                                <!--                                <span t-field="doc.name.street"/>-->
+                                <span t-field="doc.student_id.street"/>
                             </td>
                             <td align="right">
                                 <span>
@@ -184,7 +189,7 @@
                                     <strong>State</strong>
                                 </span>
                                 <td>:&amp;nbsp;
-                                    <!--                                    <span t-field="doc.name.state"/>-->
+                                    <span t-field="doc.student_id.state_id.name"/>
                                 </td>
                             </td>
                         </tr>
