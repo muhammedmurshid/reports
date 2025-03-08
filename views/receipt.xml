@@ -16,7 +16,7 @@
                 <t t-call="web.basic_layout">
                     <div class="page">
                         <div class="text-middle" style="text-align:center;">
-                            <h4>Invoice cum Receipt</h4>
+                            <h4>Invoice</h4>
                             <h6>Original Copy</h6>
                         </div>
                     </div>
