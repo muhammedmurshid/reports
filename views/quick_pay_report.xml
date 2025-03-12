@@ -11,6 +11,8 @@
             'view_mode': 'tree',
             'res_model': 'fee.quick.pay',
             'target': 'current',
+            'context': {'search_default_assigned': 1}
+
             }
         </field>
     </record>
