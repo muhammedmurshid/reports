@@ -18,5 +18,5 @@
     <menuitem name="Quick Pay" id="menu_quick_pay_report"
               action="action_redirect_quick_pay_report"
               parent="reports_main_view"
-              sequence="2"/>
+              sequence="4"/>
 </odoo>

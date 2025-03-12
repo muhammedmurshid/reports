@@ -23,7 +23,9 @@
         # 'views/payment.xml',
         # 'views/payment_web_form.xml',
         'views/receipt.xml',
-        'views/lead.xml'
+        'views/lead.xml',
+        'views/ancillary_report.xml',
+        'views/tax_report.xml',
 
     ],
 

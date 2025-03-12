@@ -26,6 +26,9 @@ class InvoiceReports(models.Model):
     sgst_amount = fields.Float(string="Sgst")
     amount_in_words = fields.Char(string="Amount in Words", compute="_compute_amount_in_words", store=1)
     company_id = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
+    fee_name = fields.Char(string="Fee Name")
+    tax = fields.Float(string="Tax")
+    amount_exc_tax = fields.Float(string="Amount (Exc Tax)")
 
 
     @api.depends('amount_inc_tax')
@@ -34,8 +37,17 @@ class InvoiceReports(models.Model):
         for i in self:
             i.amount_in_words = num2words(i.amount_inc_tax, lang='en').upper()
 
-    def _generate_invoice_number(self):
-        """Generate a unique Invoice Number with increasing count per academic year"""
+
+    amount_in_words_non_tax = fields.Char(string="Amount in Words", compute="_compute_amount_in_words_non_tax", store=1)
+
+    @api.depends('amount_exc_tax')
+    def _compute_amount_in_words_non_tax(self):
+        print('workssssss')
+        for i in self:
+            i.amount_in_words_non_tax = num2words(i.amount_exc_tax, lang='en').upper()
+
+    def _generate_invoice_number(self, fee_type):
+        """Generate a unique Invoice Number with separate sequences for Normal and Ancillary Fees."""
 
         today = date.today()
         year = today.year
@@ -47,9 +59,15 @@ class InvoiceReports(models.Model):
         else:  # If Jan-March, use previous year as start
             academic_year = f"{year - 1}-{str(year)[-2:]}"
 
-        prefix = f"VXL-{academic_year}/"
+        # Define prefix based on fee type
+        if fee_type == "Ancillary Fee(Non Taxable)":
+            print('yaaaaaaaaa', fee_type)
+            prefix = f"VXL-ANC-{academic_year}/"
+        else:
+            print('noo', fee_type)
+            prefix = f"VXL-{academic_year}/"
 
-        # Get all invoice numbers for the current academic year
+        # Get all invoice numbers for the current academic year of the same type
         existing_invoices = self.search([('invoice_number', 'like', prefix + '%')])
 
         highest_number = 0
@@ -59,17 +77,23 @@ class InvoiceReports(models.Model):
                 number = int(match.group(1))
                 highest_number = max(highest_number, number)
 
-        new_number = highest_number + 1  # Get next number
+        new_number = highest_number + 1  # Get next number in sequence
 
         return f"{prefix}{new_number:02d}"
 
-    @api.model
     def create(self, vals):
-        if not vals.get('invoice_number'):
-            vals['invoice_number'] = self._generate_invoice_number()
+        """Override create method to generate invoice number"""
+        if 'fee_type' in vals:
+            vals['invoice_number'] = self._generate_invoice_number(vals['fee_type'])  # Pass fee_type
+        else:
+            raise ValueError("Missing required field 'fee_type' for invoice generation")
         return super(InvoiceReports, self).create(vals)
 
     def act_print_invoice(self):
         print('k')
         return self.env.ref('reports.action_report_students_payment_history_receipt').report_action(self)
+
+    def act_print_invoice_non_tax(self):
+        print('k')
+        return self.env.ref('reports.action_report_students_payment_history_receipt_non_tax').report_action(self)
 

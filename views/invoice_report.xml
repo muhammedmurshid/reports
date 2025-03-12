@@ -132,10 +132,13 @@
                 <field name="branch"/>
                 <field name="date"/>
                 <field name="payment_mode"/>
+                <field name="fee_name"/>
                 <field name="fee_type"/>
                 <field name="reference_no"/>
                 <field name="cheque_no"/>
                 <field name="batch"/>
+                <field name="amount_exc_tax"/>
+                <field name="tax"/>
                 <field name="amount_inc_tax"/>
                 <field name="fee_collected_by"/>
                 <field name="lead_id" optional="hide"/>
@@ -145,19 +148,36 @@
         </field>
     </record>
 
+    <record id="report_tax_lists" model="ir.ui.view">
+        <field name="name">report.search.view</field>
+        <field name="model">invoice.reports</field>
+        <!--        <field name="inherit_id" ref="custom_leads.tree_view_leads_logic"/>-->
+        <field name="arch" type="xml">
+            <search>
+                <!-- Default filter for Today -->
+                <filter string="Tax Reports" name="tax_reports" domain="[('fee_type', '!=', 'Ancillary Fee(Non Taxable)')]"/>
+                <field name="name" string="Name"/>
+                <field name="invoice_number" string="Invoice Number"/>
+                <field name="payment_mode" string="Payment Mode"/>
+                <field name="fee_type" string="Fee Type"/>
+            </search>
+        </field>
+    </record>
 
-    <record id="invoice_report_action" model="ir.actions.act_window">
+    <record id="invoice_report_action_main" model="ir.actions.act_window">
         <field name="name">Invoice Report</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">invoice.reports</field>
         <field name="view_mode">tree</field>
-
+<!--        <field name="domain">[('fee_type', '!=', 'Ancillary Fee(Non Taxable)')]</field>-->
+        <field name="view_id" ref="reports.invoice_report_tree_view"/>
+        <field name="context">{'search_default_tax_reports': 1}</field>
     </record>
     <!--Menu Item for the model Dashboard Blocks-->
     <menuitem name="Reports" id="reports_main_view"
               web_icon="reports,static/description/icon.png"
-              sequence="1" action="invoice_report_action"/>
+              sequence="1" action="invoice_report_action_main"/>
     <menuitem name="Invoice Report" id="invoice_reports_menu"
               parent="reports_main_view"
-              sequence="1" action="invoice_report_action"/>
+              sequence="1" action="invoice_report_action_main"/>
 </odoo>
