@@ -10,7 +10,7 @@
     'category': 'Specific Category',
     'license': 'LGPL-3',
     'depends': [
-        'base','website', 'openeducat_core', 'fee_collection_17','custom_leads' # List of module dependencies
+        'base', 'website', 'openeducat_core', 'fee_collection_17', 'custom_leads'  # List of module dependencies
 
         # Add other module dependencies here
     ],
@@ -29,6 +29,13 @@
         'views/wallet_report.xml'
 
     ],
+    'assets': {
+        'web.assets_backend': [
+
+            '/reports/static/src/css/styles.css',
+
+        ],
+    },
 
     'installable': True,
     'application': False,
