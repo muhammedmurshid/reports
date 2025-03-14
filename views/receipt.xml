@@ -21,7 +21,7 @@
                 <t t-call="web.basic_layout">
                     <div class="page">
                         <div class="text-middle" style="text-align:center;">
-                            <h4>Receipt</h4>
+                            <h4>Invoice</h4>
                             <h6>Original Copy</h6>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         </tr>
                         <tr align="left">
                             <td>
-                                <strong>Receipt No</strong>
+                                <strong>Invoice No</strong>
                                 <!--                                        </td>-->
                                 <!--                                        <td>-->
 
@@ -325,8 +325,8 @@
                 <t t-call="web.basic_layout">
                     <div class="page">
                         <div class="text-middle" style="text-align:center;">
-                            <h4>Receipt</h4>
-<!--                            <h6>Original Copy</h6>-->
+                            <h4>Invoice</h4>
+                            <h6>Original Copy</h6>
                         </div>
                     </div>
                     <style type="text/css">
@@ -391,7 +391,7 @@
                         </tr>
                         <tr align="left">
                             <td>
-                                <strong>Receipt No</strong>
+                                <strong>Invoice No</strong>
                                 <!--                                        </td>-->
                                 <!--                                        <td>-->
 

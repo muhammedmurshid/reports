@@ -29,6 +29,8 @@ class InvoiceReports(models.Model):
     fee_name = fields.Char(string="Fee Name")
     tax = fields.Float(string="Tax")
     amount_exc_tax = fields.Float(string="Amount (Exc Tax)")
+    admission_no = fields.Char(string="Admission No.", related="student_id.gr_no")
+    admission_date = fields.Date(string="Admission Date", related="student_id.admission_date")
 
 
     @api.depends('amount_inc_tax')

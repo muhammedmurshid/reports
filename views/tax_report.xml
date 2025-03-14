@@ -7,6 +7,8 @@
             <tree>
                 <field name="name"/>
                 <field name="invoice_number"/>
+                <field name="admission_no"/>
+                <field name="admission_date"/>
                 <field name="branch"/>
                 <field name="date"/>
                 <field name="payment_mode"/>
