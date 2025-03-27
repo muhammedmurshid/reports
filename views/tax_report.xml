@@ -10,8 +10,8 @@
                 <field name="admission_no"/>
                 <field name="admission_date"/>
                 <field name="branch"/>
-                <field name="date"/>
-                <field name="payment_mode"/>
+                <field name="date" string="Invoice Date"/>
+<!--                <field name="payment_mode"/>-->
                 <field name="fee_name"/>
                 <field name="fee_type"/>
                 <field name="reference_no"/>
@@ -21,7 +21,7 @@
 <!--                <field name="tax"/>-->
                 <field name="cgst_amount"/>
                 <field name="sgst_amount"/>
-                <field name="amount_inc_tax" string="Total Rupees"/>
+                <field name="amount_inc_tax" string="Total Amount" sum="Total Amount"/>
 
                 <field name="fee_collected_by"/>
                 <field name="lead_id" optional="hide"/>
@@ -40,6 +40,10 @@
         <field name="view_id" ref="reports.invoice_report_tree_view_tax"/>
 
     </record>
+
+    <menuitem name="Reports" id="reports_main_view"
+              web_icon="reports,static/description/icon.png"
+              sequence="1" action="invoice_report_action_tax"/>
     <!--Menu Item for the model Dashboard Blocks-->
     <menuitem name="Tax Report" id="invoice_reports_menu_tax"
               parent="reports_main_view"

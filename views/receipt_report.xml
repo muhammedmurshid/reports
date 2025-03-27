@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="receipt_report_tree_view" model="ir.ui.view">
+        <field name="name">receipt.report.tree</field>
+        <field name="model">receipts.report</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="receipt_no"/>
+                <field name="name"/>
+                <field name="payment_mode"/>
+                <field name="branch"/>
+                <field name="batch"/>
+                <field name="amount"/>
+                <field name="student_id" optional="1"/>
+                <button name="act_print_receipt" type="object" class="fa fa-download"
+                />
+
+            </tree>
+        </field>
+    </record>
+
+    <!--    <record id="report_tax_lists" model="ir.ui.view">-->
+    <!--        <field name="name">report.search.view</field>-->
+    <!--        <field name="model">invoice.reports</field>-->
+    <!--        &lt;!&ndash;        <field name="inherit_id" ref="custom_leads.tree_view_leads_logic"/>&ndash;&gt;-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <search>-->
+    <!--                &lt;!&ndash; Default filter for Today &ndash;&gt;-->
+    <!--                <filter string="Tax Reports" name="tax_reports" domain="[('fee_type', '!=', 'Ancillary Fee(Non Taxable)')]"/>-->
+    <!--                <field name="name" string="Name"/>-->
+    <!--                <field name="invoice_number" string="Invoice Number"/>-->
+    <!--                <field name="payment_mode" string="Payment Mode"/>-->
+    <!--                <field name="fee_type" string="Fee Type"/>-->
+    <!--            </search>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <record id="receipt_report_action_main" model="ir.actions.act_window">
+        <field name="name">Receipt Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">receipts.report</field>
+        <field name="view_mode">tree</field>
+        <!--        <field name="domain">[('fee_type', '!=', 'Ancillary Fee(Non Taxable)')]</field>-->
+        <!--        <field name="view_id" ref="reports.invoice_report_tree_view"/>-->
+        <!--        <field name="context">{'search_default_tax_reports': 1}</field>-->
+    </record>
+
+    <menuitem name="Receipt Report" id="receipt_reports_menu"
+              parent="reports_main_view"
+              sequence="5" action="receipt_report_action_main"/>
+
+
+    <record id="action_report_receipt" model="ir.actions.report">
+        <field name="name">Receipt</field>
+        <field name="model">receipts.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">reports.report_receipt_main</field>
+        <field name="report_file">reports.report_receipt_main</field>
+        <field name="print_report_name">'%s%s - %s' % (
+            object.name,
+            (' - ' + object.date.strftime('%Y-%m-%d')) if object.date else '',
+            object.receipt_no.split('/')[-1] if object.receipt_no else ''
+            )
+        </field>
+        <field name="binding_model_id" ref="reports.model_invoice_reports"/>
+        <field name="binding_type">report</field>
+    </record>
+    <template id="report_receipt_main">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <div class="page">
+                        <!--                        <div class="text-middle" style="text-align:center;">-->
+                        <!--                            <h4>Receipt</h4>-->
+
+                        <!--                        </div>-->
+                    </div>
+                    <style type="text/css">
+                        .table_head_border {
+                        text-align : center;
+                        vertical-align: middle;
+                        border-top: 1px solid black;
+                        border-bottom: 1px solid black;
+                        border-right: 1px solid black;
+                        border-left: 1px solid black;
+                        }
+                        .table_value_border {
+                        vertical-align: middle;
+                        border-top: 1px solid black;
+                        border-bottom: 1px solid black;
+                        border-right: 1px solid black;
+                        border-left: 1px solid black;
+                        }
+                        .total_border{
+                        vertical-align: middle;
+                        border-right: 1px solid black;
+                        border-left: 1px solid black;
+                        border-top: 1px solid black;
+                        border-bottom: 1px solid black;
+                        }
+                    </style>
+                    <div class="page">
+                        <table width="100%">
+                            <tr>
+                                <td>
+                                    <t t-if="doc.company_id.logo">
+                                        <img t-att-src="image_data_uri(doc.company_id.logo)"
+                                             style="width:30%; max-height:150pt; max-width:100pt;"/>
+                                    </t>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span t-field="doc.company_id.partner_id"
+                                          t-options='{"widget": "contact", "fields": ["name", "address", "phone", "acc_number", "vat"], "no_marker": True}'/>
+                                </td>
+                                <h4 align="center">Receipt</h4>
+                            </tr>
+                        </table>
+                    </div>
+                    <!--                                </table>-->
+                    <br></br>
+
+
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <strong>Receipt No</strong>
+                            </td>
+                            <td>:
+                                <span t-field="doc.receipt_no"/>
+                            </td>
+                            <td>
+                                <strong>Date</strong>
+                            </td>
+                            <td>:
+                                <span t-field="doc.date"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Name</strong>
+                            </td>
+                            <td>:
+                                <span t-field="doc.name"/>
+                            </td>
+                            <td>
+                                <strong>Branch</strong>
+                            </td>
+                            <td>:
+                                <span t-field="doc.branch"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Batch</strong>
+                            </td>
+                            <td>:
+                                <span t-field="doc.student_id.batch_id.name"/>
+                            </td>
+                            <td>
+                                <strong>Course</strong>
+                            </td>
+                            <td>:
+                                <span t-field="doc.student_id.course_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Address</strong>
+                            </td>
+                            <td>:
+                                <span t-field="doc.student_id.street"/>
+                            </td>
+                            <td>
+                                <strong>Admission No</strong>
+                            </td>
+                            <td>:
+                                <span t-field="doc.student_id.gr_no"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>State</strong>
+                            </td>
+                            <td>:
+                                <span t-field="doc.student_id.state_id.name"/>
+                            </td>
+                            <td>
+                                <strong>Payment Mode</strong>
+                            </td>
+                            <td>:
+                                <span t-field="doc.payment_mode"/>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <br></br>
+
+                    <table width="100%" border="1" style="border-collapse: collapse;">
+                        <tr>
+                            <td class="table_value_border" style="padding-left: 14px;">
+                                <b>Total Amount:</b>
+                            </td>
+                            <td class="table_value_border" align="center">
+                                <span t-esc="'₹ {:.2f}'.format(sum(doc.amount for doc in docs))"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_value_border" style="padding-left: 14px;">
+                                <b>Total Amount Received in Words:</b>
+                            </td>
+                            <td class="table_value_border" align="center">
+                                <span t-esc="docs[0].amount_in_words if docs else ''"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table>
+                        <tr>
+                            <td>Sd/-</td>
+                        </tr>
+                        <tr>
+                            <td>Accountant</td>
+                        </tr>
+                        <tr>
+                            <td>For,
+                                <span t-field="doc.company_id.name"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

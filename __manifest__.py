@@ -26,7 +26,8 @@
         'views/lead.xml',
         'views/ancillary_report.xml',
         'views/tax_report.xml',
-        'views/wallet_report.xml'
+        'views/wallet_report.xml',
+        'views/receipt_report.xml'
 
     ],
     'assets': {

@@ -19,12 +19,12 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.basic_layout">
-                    <div class="page">
-                        <div class="text-middle" style="text-align:center;">
-                            <h4>Invoice</h4>
-                            <h6>Original Copy</h6>
-                        </div>
-                    </div>
+                    <!--                    <div class="page">-->
+                    <!--                        <div class="text-middle" style="text-align:center;">-->
+                    <!--                            -->
+                    <!--                            <h6>Original Copy</h6>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                     <style type="text/css">
                         .table_head_border {
                         text-align : center;
@@ -66,62 +66,44 @@
                                           t-options='{"widget": "contact", "fields": ["name", "address", "phone", "acc_number", "vat"], "no_marker": True}'/>
 
                                 </td>
-
+                                <h4 align="center">Invoice</h4>
                             </tr>
                         </table>
                     </div>
                     <!--                                </table>-->
                     <br></br>
-                    <br></br>
-                    <table align="left" width="50%">
-                        <tr align="left">
+
+                    <table width="100%">
+                        <tr >
                             <td>
                                 <strong>Date</strong>
                                 <!--                                        </td>-->
                                 <!--                                        <td>-->
 
                             </td>
-                            <td align="left">:&amp;nbsp;
+                            <td >:
                                 <span t-field="doc.date"/>
                             </td>
                         </tr>
-                        <tr align="left">
+                        <tr>
                             <td>
                                 <strong>Invoice No</strong>
                                 <!--                                        </td>-->
                                 <!--                                        <td>-->
 
                             </td>
-                            <td align="left">:&amp;nbsp;
+                            <td>:
                                 <span t-field="doc.invoice_number"/>
                             </td>
                         </tr>
-                    </table>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-
-                    <table width="100%">
                         <tr>
-
-<!--                            <td align="right">-->
-<!--                                <span>-->
-<!--                                    <strong>Payment Mode</strong>-->
-<!--                                </span>-->
-<!--                            </td>-->
-<!--                            <td align="left">:&amp;nbsp;-->
-<!--                                <span t-field="doc.payment_mode"/>-->
-<!--                            </td>-->
-                        </tr>
-                        <tr>
-                            <td style="padding-top:10px;">
+                            <td>
                                 <strong>Name</strong>
                             </td>
                             <td>:&amp;nbsp;
                                 <span t-field="doc.name"/>
                             </td>
-                            <td align="right">
+                            <td >
                                 <span>
                                     <strong>Branch</strong>
                                 </span>
@@ -130,18 +112,18 @@
                             <td>:&amp;nbsp;
                                 <span t-field="doc.student_id.branch_id.name"/>
                             </td>
-<!--                            <td >-->
-<!--                                <span>-->
-<!--                                    <strong>Cheque No/Reference No</strong>-->
-<!--                                </span>-->
-<!--                            </td>-->
-<!--                            <td>:&amp;nbsp;-->
-<!--                                <span t-field="doc.cheque_no"/>-->
-<!--                            </td>-->
+                            <!--                            <td >-->
+                            <!--                                <span>-->
+                            <!--                                    <strong>Cheque No/Reference No</strong>-->
+                            <!--                                </span>-->
+                            <!--                            </td>-->
+                            <!--                            <td>:&amp;nbsp;-->
+                            <!--                                <span t-field="doc.cheque_no"/>-->
+                            <!--                            </td>-->
 
                         </tr>
                         <tr>
-                            <td style="padding-top:10px;">
+                            <td >
                                 <span>
                                     <strong>Batch</strong>
                                 </span>
@@ -151,7 +133,7 @@
                                 <span t-field="doc.batch"/>
                             </td>
 
-                            <td align="right">
+                            <td >
                                 <span>
                                     <strong>Course</strong>
                                 </span>
@@ -162,7 +144,7 @@
                         </tr>
 
                         <tr>
-                            <td style="padding-top:10px;">
+                            <td >
                                 <span>
                                     <strong>Address</strong>
                                 </span>
@@ -170,7 +152,7 @@
                             <td>:&amp;nbsp;
                                 <span t-field="doc.student_id.street"/>
                             </td>
-                            <td align="right">
+                            <td >
                                 <span>
                                     <strong>Admission No</strong>
                                 </span>
@@ -181,7 +163,7 @@
 
                         </tr>
                         <tr>
-                            <td style="padding-top:10px;">
+                            <td >
                                 <span>
                                     <strong>State</strong>
                                 </span>
@@ -378,27 +360,27 @@
 
                     <table width="100%">
                         <tr>
-<!--                            <td>-->
-<!--                                <strong>Billed To</strong>-->
-<!--                            </td>-->
-<!--                            <td>:&amp;nbsp;</td>-->
-<!--                            <td align="right">-->
-<!--                                <span>-->
-<!--                                    <strong>Payment Mode</strong>-->
-<!--                                </span>-->
-<!--                            </td>-->
-<!--                            <td align="left">:&amp;nbsp;-->
-<!--                                <span t-field="doc.payment_mode"/>-->
-<!--                            </td>-->
+                            <!--                            <td>-->
+                            <!--                                <strong>Billed To</strong>-->
+                            <!--                            </td>-->
+                            <!--                            <td>:&amp;nbsp;</td>-->
+                            <!--                            <td >-->
+                            <!--                                <span>-->
+                            <!--                                    <strong>Payment Mode</strong>-->
+                            <!--                                </span>-->
+                            <!--                            </td>-->
+                            <!--                            <td align="left">:&amp;nbsp;-->
+                            <!--                                <span t-field="doc.payment_mode"/>-->
+                            <!--                            </td>-->
                         </tr>
                         <tr>
-                            <td style="padding-top:10px;">
+                            <td >
                                 <strong>Name</strong>
                             </td>
                             <td>:&amp;nbsp;
                                 <span t-field="doc.name"/>
                             </td>
-                            <td align="right">
+                            <td >
                                 <span>
                                     <strong>Branch</strong>
                                 </span>
@@ -407,18 +389,18 @@
                             <td>:&amp;nbsp;
                                 <span t-field="doc.student_id.branch_id.name"/>
                             </td>
-<!--                            <td align="right">-->
-<!--                                <span>-->
-<!--                                    <strong>Cheque No/Reference No</strong>-->
-<!--                                </span>-->
-<!--                            </td>-->
-<!--                            <td>:&amp;nbsp;-->
-<!--                                <span t-field="doc.cheque_no"/>-->
-<!--                            </td>-->
+                            <!--                            <td >-->
+                            <!--                                <span>-->
+                            <!--                                    <strong>Cheque No/Reference No</strong>-->
+                            <!--                                </span>-->
+                            <!--                            </td>-->
+                            <!--                            <td>:&amp;nbsp;-->
+                            <!--                                <span t-field="doc.cheque_no"/>-->
+                            <!--                            </td>-->
 
                         </tr>
                         <tr>
-                            <td style="padding-top:10px;">
+                            <td >
                                 <span>
                                     <strong>Batch</strong>
                                 </span>
@@ -428,7 +410,7 @@
                                 <span t-field="doc.batch"/>
                             </td>
 
-                            <td align="right">
+                            <td >
                                 <span>
                                     <strong>Course</strong>
                                 </span>
@@ -437,11 +419,11 @@
                                 <span t-field="doc.student_id.course_id.name"/>
                             </td>
                         </tr>
-<!--                        <tr>-->
-<!--                            -->
-<!--                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                            -->
+                        <!--                        </tr>-->
                         <tr>
-                            <td style="padding-top:10px;">
+                            <td >
                                 <span>
                                     <strong>Address</strong>
                                 </span>
@@ -449,7 +431,7 @@
                             <td>:&amp;nbsp;
                                 <span t-field="doc.student_id.street"/>
                             </td>
-                            <td align="right">
+                            <td >
                                 <span>
                                     <strong>Admission No</strong>
                                 </span>
@@ -460,7 +442,7 @@
 
                         </tr>
                         <tr>
-                            <td style="padding-top:10px;">
+                            <td >
                                 <span>
                                     <strong>State</strong>
                                 </span>
@@ -468,7 +450,7 @@
                                     <span t-field="doc.student_id.state_id.name"/>
                                 </td>
                             </td>
-                            <td align="right">
+                            <td >
                                 <span>
                                     <strong>Payment Type</strong>
                                 </span>
