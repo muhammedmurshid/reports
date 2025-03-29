@@ -17,10 +17,10 @@
                 <field name="reference_no"/>
 <!--                <field name="cheque_no"/>-->
                 <field name="batch"/>
-                <field name="amount_exc_tax" string="Taxable Rupees"/>
+                <field name="amount_exc_tax" string="Taxable Rupees" sum="Total Tax Amount"/>
 <!--                <field name="tax"/>-->
-                <field name="cgst_amount"/>
-                <field name="sgst_amount"/>
+                <field name="cgst_amount" sum="Total CGST Tax Amount"/>
+                <field name="sgst_amount" sum="Total SGST Tax Amount"/>
                 <field name="amount_inc_tax" string="Total Amount" sum="Total Amount"/>
 
                 <field name="fee_collected_by"/>

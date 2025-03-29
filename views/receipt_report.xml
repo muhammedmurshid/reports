@@ -11,7 +11,7 @@
                 <field name="payment_mode"/>
                 <field name="branch"/>
                 <field name="batch"/>
-                <field name="amount"/>
+                <field name="amount" string="Total Amount"/>
                 <field name="student_id" optional="1"/>
                 <button name="act_print_receipt" type="object" class="fa fa-download"
                 />
