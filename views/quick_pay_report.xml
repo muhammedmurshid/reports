@@ -17,8 +17,8 @@
         </field>
     </record>
 
-    <menuitem name="Quick Pay" id="menu_quick_pay_report"
-              action="action_redirect_quick_pay_report"
-              parent="reports_main_view"
-              sequence="4"/>
+<!--    <menuitem name="Quick Pay" id="menu_quick_pay_report"-->
+<!--              action="action_redirect_quick_pay_report"-->
+<!--              parent="reports_main_view"-->
+<!--              sequence="4"/>-->
 </odoo>

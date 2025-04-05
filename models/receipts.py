@@ -21,6 +21,7 @@ class Receipts(models.Model):
     receipt_no = fields.Char("Receipt No", readonly=True, copy=False, default="/")
     company_id = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
     batch = fields.Char(string="Batch")
+    reference_no = fields.Char(string="Reference No.")
 
 
     @api.model
@@ -44,29 +45,42 @@ class Receipts(models.Model):
             fy_start = year - 1
             fy_end = year
 
-        fy_code = f"{fy_start}-{str(fy_end)[-2:]}"
+        fy_code = f"{fy_start}-{str(fy_end)[-2:]}"  # e.g., 2025-26
 
-        # Define prefixes based on payment mode
+        # Define prefixes
         prefixes = {
-            'Cash': 'VXLC',
+            'Cash': 'VXL',
             'Bank Direct': 'VXLBD',
             'Gateway': 'VXLBG'
         }
-        prefix = prefixes.get(payment_mode, 'VXLC')  # Default to Cash if not found
+        prefix = prefixes.get(payment_mode, 'VXLC')  # fallback
 
-        # Find last receipt number for the same financial year and payment mode
+        # Determine search pattern and receipt format
+        if payment_mode == 'Cash':
+            search_pattern = f"{prefix}-{fy_code}/CR-%"
+        else:
+            search_pattern = f"{prefix}-{fy_code}/%"
+
+        # Search for last receipt
         last_receipt = self.search(
-            [('receipt_no', 'like', f"{prefix}-{fy_code}/%")],
+            [('receipt_no', 'like', search_pattern)],
             order="receipt_no desc",
             limit=1
         )
 
         if last_receipt:
-            last_number = int(last_receipt.receipt_no.split("/")[-1]) + 1
+            number_part = last_receipt.receipt_no.split("/")[-1]
+            if payment_mode == 'Cash':
+                number_part = number_part.replace("CR-", "")
+            last_number = int(number_part) + 1
         else:
             last_number = 1
 
-        return f"{prefix}-{fy_code}/{str(last_number).zfill(2)}"
+        # Format final receipt number
+        if payment_mode == 'Cash':
+            return f"{prefix}-{fy_code}/CR-{str(last_number).zfill(3)}"
+        else:
+            return f"{prefix}-{fy_code}/{str(last_number).zfill(3)}"
 
     def act_print_receipt(self):
         print('k')

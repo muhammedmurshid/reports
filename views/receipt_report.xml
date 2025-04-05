@@ -9,6 +9,7 @@
                 <field name="receipt_no"/>
                 <field name="name"/>
                 <field name="payment_mode"/>
+                <field name="reference_no"/>
                 <field name="branch"/>
                 <field name="batch"/>
                 <field name="amount" string="Total Amount"/>
@@ -194,6 +195,16 @@
                             <td>:
                                 <span t-field="doc.payment_mode"/>
                             </td>
+
+                        </tr>
+                         <tr>
+                            <td>
+                                <strong>Reference No.</strong>
+                            </td>
+                            <td>:
+                                <span t-field="doc.reference_no"/>
+                            </td>
+
                         </tr>
 
                     </table>
