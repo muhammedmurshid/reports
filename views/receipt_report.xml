@@ -4,9 +4,9 @@
         <field name="name">receipt.report.tree</field>
         <field name="model">receipts.report</field>
         <field name="arch" type="xml">
-            <tree>
-                <field name="date"/>
-                <field name="receipt_no"/>
+            <tree multi_edit="1">
+                <field name="date" readonly="0"/>
+                <field name="receipt_no" readonly="0"/>
                 <field name="name"/>
                 <field name="payment_mode"/>
                 <field name="reference_no"/>

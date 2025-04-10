@@ -4,13 +4,13 @@
         <field name="name">invoice.report.tree.tax</field>
         <field name="model">invoice.reports</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree multi_edit="1">
                 <field name="name"/>
-                <field name="invoice_number"/>
+                <field name="invoice_number" readonly="0"/>
                 <field name="admission_no"/>
                 <field name="admission_date"/>
                 <field name="branch"/>
-                <field name="date" string="Invoice Date"/>
+                <field name="date" string="Invoice Date" readonly="0"/>
 <!--                <field name="payment_mode"/>-->
                 <field name="fee_name"/>
                 <field name="fee_type"/>
