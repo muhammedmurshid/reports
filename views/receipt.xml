@@ -201,7 +201,7 @@
                                     <span t-esc="sl_no"/>
                                 </td>
                                 <td class="table_value_border" align="center">
-                                    <span t-esc="doc.fee_type"/>
+                                    <span t-esc="doc.fee_name"/>
                                 </td>
                                 <td class="table_value_border" align="center">
                                     <span t-esc="'₹ {:.2f}'.format(doc.amount_exc_tax)"/>
