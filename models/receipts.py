@@ -22,6 +22,7 @@ class Receipts(models.Model):
     company_id = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
     batch = fields.Char(string="Batch")
     reference_no = fields.Char(string="Reference No.")
+    fee_collector_id = fields.Many2one('res.users', string="Fee Collector")
 
 
     @api.model
