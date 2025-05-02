@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem name="Credit Notes"
+              id="credit_note_menu_in_report"
+              action="invoice_report_action_tax"
+              parent="reports_main_view"
+              sequence="10"/>
+</odoo>

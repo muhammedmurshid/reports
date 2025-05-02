@@ -19,8 +19,10 @@ class Receipts(models.Model):
          ('Kottayam Campus', 'Kottayam Campus'),
          ('Perinthalmanna Branch', 'Perinthalmanna Branch'), ('Bangalore Campus', 'Bangalore Campus')], string="Branch")
     receipt_no = fields.Char("Receipt No", readonly=True, copy=False, default="/")
+    batch_id = fields.Many2one('op.batch', string="Batch id")
     company_id = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
     batch = fields.Char(string="Batch")
+
     reference_no = fields.Char(string="Reference No.")
     fee_collector_id = fields.Many2one('res.users', string="Fee Collector")
 
