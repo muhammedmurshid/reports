@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record id="credit_note_tree_view" model="ir.ui.view">
+        <field name="name">credit.note.tree</field>
+        <field name="model">op.credit.notes</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1">
+                <field name="date"/>
+                <field name="student_id" widget="many2one"/>
+                <field name="voucher_no" readonly="0"/>
+                <field name="admission_no"/>
+                <field name="fee_type" />
+                <field name="batch_id"/>
+                <field name="amount" widget="monetary"/>
+                <field name="currency_id" optional="hide"/>
+                <field name="refund_id" widget="many2one"/>
+                <field name="refund_given_by"/>
+<!--                <button name="act_print_invoice_non_tax" type="object" class="fa fa-download"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_for_credit_notes" model="ir.actions.act_window">
+        <field name="name">Credit Notes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">op.credit.notes</field>
+        <field name="view_mode">tree</field>
+    </record>
     <menuitem name="Credit Notes"
               id="credit_note_menu_in_report"
-              action="invoice_report_action_tax"
+              action="action_for_credit_notes"
               parent="reports_main_view"
               sequence="10"/>
 </odoo>
