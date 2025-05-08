@@ -36,7 +36,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">invoice.reports</field>
         <field name="view_mode">tree</field>
-        <field name="domain">[('fee_type', '!=', 'Ancillary Fee(Non Taxable)')]</field>
+        <field name="domain">[('fee_type', '!=', 'Collection A/C')]</field>
         <field name="view_id" ref="reports.invoice_report_tree_view_tax"/>
 
     </record>

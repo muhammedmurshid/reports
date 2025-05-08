@@ -28,16 +28,16 @@
     </record>
 
     <record id="invoice_report_action_ancillary" model="ir.actions.act_window">
-        <field name="name">Ancillary Report</field>
+        <field name="name">Collection Report</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">invoice.reports</field>
         <field name="view_mode">tree</field>
-        <field name="domain">[('fee_type', '=', 'Ancillary Fee(Non Taxable)')]</field>
+        <field name="domain">[('fee_type', '=', 'Collection A/C')]</field>
         <field name="view_id" ref="reports.invoice_report_tree_view_ancillary"/>
 
     </record>
     <!--Menu Item for the model Dashboard Blocks-->
-    <menuitem name="Ancillary Report" id="invoice_reports_menu_ancillary"
+    <menuitem name="Collection Report" id="invoice_reports_menu_ancillary"
               parent="reports_main_view"
               sequence="3" action="invoice_report_action_ancillary"/>
 </odoo>

@@ -62,7 +62,7 @@ class InvoiceReports(models.Model):
             academic_year = f"{year - 1}-{str(year)[-2:]}"
 
         # Define prefix based on fee type
-        if fee_type == "Ancillary Collection A/C":
+        if fee_type == "Collection A/C":
             print('yaaaaaaaaa', fee_type)
             prefix = f"VXL-ANC-{academic_year}/"
         else:
