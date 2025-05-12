@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <tree string="Student">
                 <field name="gr_no" string="Admission ID"/>
-                <field name="name"/>
+                <field name="name" />
                 <field name="mobile"/>
                 <field name="currency_id" optional="hide"/>
                 <field name="email"/>

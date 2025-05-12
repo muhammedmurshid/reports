@@ -14,8 +14,8 @@
                 <field name="batch"/>
                 <field name="fee_collector_id"/>
                 <field name="amount" string="Total Amount"/>
-                <field name="student_id" optional="1"/>
-                <field name="batch_id" optional="1"/>
+                <field name="student_id" optional="1" widget="many2one"/>
+                <field name="batch_id" optional="1" widget="many2one"/>
                 <button name="act_print_receipt" type="object" class="fa fa-download"/>
             </tree>
         </field>

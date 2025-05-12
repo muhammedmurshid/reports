@@ -24,8 +24,8 @@
                 <field name="amount_inc_tax" string="Total Amount" sum="Total Amount"/>
 
                 <field name="fee_collected_by"/>
-                <field name="lead_id" optional="hide"/>
-                <field name="student_id" optional="hide"/>
+                <field name="lead_id" optional="hide" widget="many2one"/>
+                <field name="student_id" optional="hide" widget="many2one"/>
                 <button name="act_print_invoice" type="object" class="fa fa-download" />
             </tree>
         </field>

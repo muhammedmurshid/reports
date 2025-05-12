@@ -11,7 +11,7 @@
                 <field name="admission_no"/>
                 <field name="fee_type" />
                 <field name="batch_id"/>
-                <field name="amount" widget="monetary"/>
+                <field name="amount" widget="monetary" sum="amount"/>
                 <field name="currency_id" optional="hide"/>
                 <field name="refund_id" widget="many2one"/>
                 <field name="refund_given_by"/>
