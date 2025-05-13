@@ -1,6 +1,7 @@
 from odoo import fields, models, api, _
 from num2words import num2words
-from datetime import date
+from datetime import date,datetime
+from dateutil.relativedelta import relativedelta
 import re
 
 class Receipts(models.Model):
@@ -22,7 +23,7 @@ class Receipts(models.Model):
     batch_id = fields.Many2one('op.batch', string="Batch id")
     company_id = fields.Many2one(string='Company', comodel_name='res.company', required=True, default=lambda self: self.env.company)
     batch = fields.Char(string="Batch")
-
+    state = fields.Selection([('completed', 'Completed'), ('cancelled','Cancelled')], string="Status", default="completed")
     reference_no = fields.Char(string="Reference No.")
     fee_collector_id = fields.Many2one('res.users', string="Fee Collector")
 
@@ -84,6 +85,26 @@ class Receipts(models.Model):
             return f"{prefix}-{fy_code}/CR-{str(last_number).zfill(3)}"
         else:
             return f"{prefix}-{fy_code}/{str(last_number).zfill(3)}"
+
+    is_current_month = fields.Boolean(
+        string='Is Current Month',
+        compute='_compute_is_current_month',
+        store=True
+    )
+
+    @api.depends('date')
+    def _compute_is_current_month(self):
+        today = datetime.today()
+        start_of_month = today.replace(day=1)
+        end_of_month = start_of_month + relativedelta(months=1)
+        for record in self:
+            if record.date:
+                record.is_current_month = (
+                        record.date >= start_of_month.date() and
+                        record.date < end_of_month.date()
+                )
+            else:
+                record.is_current_month = False
 
     def act_print_receipt(self):
         print('k')

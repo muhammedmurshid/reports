@@ -1,6 +1,7 @@
 from odoo import fields,models, api, _
-from datetime import date
 import re
+from datetime import date,datetime
+from dateutil.relativedelta import relativedelta
 from num2words import num2words
 
 
@@ -31,7 +32,26 @@ class InvoiceReports(models.Model):
     amount_exc_tax = fields.Float(string="Amount (Exc Tax)")
     admission_no = fields.Char(string="Admission No.", related="student_id.gr_no")
     admission_date = fields.Date(string="Admission Date", related="student_id.admission_date")
+    state = fields.Selection([('completed', 'Completed'), ('cancelled','Cancelled')], string="Status", default="completed")
+    is_current_month = fields.Boolean(
+        string='Is Current Month',
+        compute='_compute_is_current_month',
+        store=True
+    )
 
+    @api.depends('date')
+    def _compute_is_current_month(self):
+        today = datetime.today()
+        start_of_month = today.replace(day=1)
+        end_of_month = start_of_month + relativedelta(months=1)
+        for record in self:
+            if record.date:
+                record.is_current_month = (
+                        record.date >= start_of_month.date() and
+                        record.date < end_of_month.date()
+                )
+            else:
+                record.is_current_month = False
 
     @api.depends('amount_inc_tax')
     def _compute_amount_in_words(self):
