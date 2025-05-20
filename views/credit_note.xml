@@ -14,7 +14,7 @@
                 <field name="amount" widget="monetary" sum="amount"/>
                 <field name="currency_id" optional="hide"/>
                 <field name="refund_id" widget="many2one"/>
-                <field name="refund_given_by"/>
+                <field name="refund_given_by" widget="many2one_avatar"/>
 <!--                <button name="act_print_invoice_non_tax" type="object" class="fa fa-download"/>-->
             </tree>
         </field>

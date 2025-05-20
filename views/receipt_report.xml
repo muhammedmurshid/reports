@@ -12,7 +12,7 @@
                 <field name="reference_no"/>
                 <field name="branch"/>
                 <field name="batch"/>
-                <field name="fee_collector_id"/>
+                <field name="fee_collector_id" widget="many2one_avatar"/>
                 <field name="amount" string="Total Amount" sum="Total"/>
                 <field name="student_id" optional="1" widget="many2one"/>
                 <field name="batch_id" optional="1" widget="many2one"/>

@@ -23,7 +23,7 @@
                 <field name="sgst_amount" sum="Total SGST Tax Amount"/>
                 <field name="amount_inc_tax" string="Total Amount" sum="Total Amount"/>
 
-                <field name="fee_collected_by"/>
+                <field name="fee_collected_by" widget="many2one_avatar"/>
                 <field name="lead_id" optional="hide" widget="many2one"/>
                 <field name="student_id" optional="hide" widget="many2one"/>
                 <button name="act_print_invoice" type="object" class="fa fa-download" invisible="state == 'cancelled'"/>
