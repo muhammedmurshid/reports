@@ -57,7 +57,7 @@
 
     </record>
 
-    <menuitem name="Reports" id="reports_main_view"
+    <menuitem name="Fee Reports" id="reports_main_view"
               web_icon="reports,static/description/icon.png"
               sequence="1" action="invoice_report_action_tax"/>
     <!--Menu Item for the model Dashboard Blocks-->
