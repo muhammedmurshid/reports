@@ -28,7 +28,8 @@
         'views/tax_report.xml',
         'views/wallet_report.xml',
         'views/receipt_report.xml',
-        'views/credit_note.xml'
+        'views/credit_note.xml',
+        'views/discount.xml'
 
     ],
     'assets': {

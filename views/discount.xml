@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="discount_report_tree_view" model="ir.ui.view">
+        <field name="name">discount.report.tree</field>
+        <field name="model">discount.report</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1">
+                <field name="sequence_no"/>
+                <field name="added_date" readonly="0"/>
+                <field name="approved_date" readonly="0"/>
+                <field name="student_id" optional="hide"/>
+                <field name="name"/>
+                <field name="discount_scheme"/>
+                <field name="amount"/>
+                <!--                <field name="payment_mode"/>-->
+                <!--                <field name="reference_no"/>-->
+                <!--                <field name="branch"/>-->
+                <!--                <field name="batch"/>-->
+                <!--                <field name="fee_collector_id" widget="many2one_avatar"/>-->
+                <!--                <field name="amount" string="Total Amount" sum="Total"/>-->
+                <!--                <field name="student_id" optional="1" widget="many2one"/>-->
+                <!--                <field name="batch_id" optional="1" widget="many2one"/>-->
+                <!--                <button name="act_print_receipt" type="object" class="fa fa-download" invisible="state == 'cancelled'"/>-->
+                <!--                <field name="state" widget="badge" decoration-success="state == 'completed'"-->
+                <!--                       decoration-danger="state == 'cancelled'"/>-->
+            </tree>
+        </field>
+    </record>
+
+<!--    <record id="discount_" model="ir.ui.view">-->
+<!--        <field name="name">school.student.form</field>-->
+<!--        <field name="model">school.student</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Student">-->
+<!--                <header>-->
+<!--                    <button name="action_confirm" type="object"-->
+<!--                            string="Confirm"-->
+<!--                            states="draft"/>-->
+<!--                    <field name="state" widget="statusbar"/>-->
+<!--                </header>-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="admn_code"/>-->
+<!--                            <field name="name"/>-->
+<!--                            <field name="address"/>-->
+<!--                            <field name="class_id"/>-->
+<!--                            <field name="division"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="dob"/>-->
+<!--                            <field name="age"/>-->
+<!--                            <field name="admn_date"/>-->
+<!--                            <field name="officer_id"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--                <div class="oe_chatter">-->
+<!--                    <field name="message_follower_ids"/>-->
+<!--                    <field name="activity_ids"/>-->
+<!--                    <field name="message_ids"/>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <record id="discount_report_action_ancillary" model="ir.actions.act_window">
+        <field name="name">Discount Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">discount.report</field>
+        <field name="view_mode">tree,form</field>
+        <!--        <field name="domain">[('fee_type', '=', 'Collection A/C')]</field>-->
+    </record>
+    <!--Menu Item for the model Dashboard Blocks-->
+    <menuitem name="Discount Report" id="discount_reports_menu"
+              parent="reports_main_view"
+              sequence="6" action="discount_report_action_ancillary"/>
+</odoo>
