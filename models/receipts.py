@@ -117,4 +117,3 @@ class Receipts(models.Model):
         print('workssssss')
         for i in self:
             i.amount_in_words = num2words(i.amount, lang='en').upper()
-

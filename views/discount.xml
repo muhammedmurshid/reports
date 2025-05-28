@@ -5,13 +5,18 @@
         <field name="model">discount.report</field>
         <field name="arch" type="xml">
             <tree multi_edit="1">
-                <field name="sequence_no"/>
+                <field name="sequence_no" string="Discount No"/>
+                <field name="name"/>
+                <field name="batch_id"/>
+                <field name="requested_by"/>
+
                 <field name="added_date" readonly="0"/>
+                <field name="approved_by"/>
                 <field name="approved_date" readonly="0"/>
                 <field name="student_id" optional="hide"/>
-                <field name="name"/>
+
                 <field name="discount_scheme"/>
-                <field name="amount"/>
+                <field name="amount" sum="Total"/>
                 <!--                <field name="payment_mode"/>-->
                 <!--                <field name="reference_no"/>-->
                 <!--                <field name="branch"/>-->

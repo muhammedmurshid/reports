@@ -10,6 +10,9 @@ class DiscountReports(models.Model):
     amount = fields.Float(string="Amount")
     discount_scheme = fields.Selection([('special', 'Special'), ('scholarship', 'Scholarship')], string="Scheme",
                                        required=True)
+    batch_id = fields.Many2one('op.batch', string="Batch")
+    approved_by = fields.Many2one('res.users', string="Approved By")
+    requested_by = fields.Many2one('res.users', string="Requested By")
     name = fields.Char(string="Student Name")
     sequence_no = fields.Char(string='Sequence Number', readonly=True, default='/')
 
