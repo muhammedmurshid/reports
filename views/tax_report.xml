@@ -4,7 +4,7 @@
         <field name="name">invoice.report.tree.tax</field>
         <field name="model">invoice.reports</field>
         <field name="arch" type="xml">
-            <tree multi_edit="1">
+            <tree multi_edit="1" js_class="custom_list_view">
                 <field name="name"/>
                 <field name="invoice_number" readonly="0"/>
                 <field name="admission_no"/>
@@ -31,6 +31,8 @@
                        decoration-danger="state == 'cancelled'"/>
             </tree>
         </field>
+<!--        <field name="type">tree</field>-->
+<!--        <field name="mode">custom_taxable_list</field>-->
     </record>
 
     <record id="tax_search_view" model="ir.ui.view">
@@ -49,12 +51,9 @@
         <field name="name">Tax Report</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">invoice.reports</field>
-        <field name="view_mode">tree</field>
         <field name="domain">[('fee_type', '!=', 'Collection A/C')]</field>
-        <field name="view_id" ref="reports.invoice_report_tree_view_tax"/>
         <field name="context">{'search_default_current_month': 1}</field>
-
-
+        <field name="views" eval="[(ref('invoice_report_tree_view_tax'), 'custom_taxable_list')]"/>
     </record>
 
     <menuitem name="Fee Reports" id="reports_main_view"

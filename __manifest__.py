@@ -29,13 +29,18 @@
         'views/wallet_report.xml',
         'views/receipt_report.xml',
         'views/credit_note.xml',
-        'views/discount.xml'
+        'views/discount.xml',
 
     ],
     'assets': {
         'web.assets_backend': [
 
             '/reports/static/src/css/styles.css',
+            # 'reports/static/src/js/custom_list_controller.js',
+            'reports/static/src/js/custom_list_renderer.js',
+            'reports/static/src/xml/custom_list_renderer.xml',
+            # 'reports/static/src/js/tax_totals_widget.js',
+            # 'reports/static/src/xml/tax_totals_widget.xml'
 
         ],
     },

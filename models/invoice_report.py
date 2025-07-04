@@ -38,6 +38,13 @@ class InvoiceReports(models.Model):
         compute='_compute_is_current_month',
         store=True
     )
+    total_amount_exc_tax = fields.Float(string="Total Amount Excl. Tax", compute="_compute_total_amount_exc_tax",
+                                        store=False)
+    @api.depends('amount_exc_tax')
+    def _compute_total_amount_exc_tax(self):
+        total = sum(self.env['invoice.reports'].search([]).mapped('amount_exc_tax'))
+        for record in self:
+            record.total_amount_exc_tax = total
 
     @api.depends('date')
     def _compute_is_current_month(self):
@@ -58,7 +65,6 @@ class InvoiceReports(models.Model):
         print('workssssss')
         for i in self:
             i.amount_in_words = num2words(i.amount_inc_tax, lang='en').upper()
-
 
     amount_in_words_non_tax = fields.Char(string="Amount in Words", compute="_compute_amount_in_words_non_tax", store=1)
 
@@ -118,4 +124,7 @@ class InvoiceReports(models.Model):
     def act_print_invoice_non_tax(self):
         print('k')
         return self.env.ref('reports.action_report_students_payment_history_receipt_non_tax').report_action(self)
+
+    def act_test(self):
+        print('hi')
 

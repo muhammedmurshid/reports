@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+<!--    <t t-name="CustomListTaxableHeader" t-inherit="web.ListRenderer" t-inherit-mode="extension">-->
+<!--        <xpath expr="//thead" position="before">-->
+<!--&lt;!&ndash;            <t t-if="props.list.model === 'invoice.reports'">&ndash;&gt;-->
+<!--                <div class="o_list_taxable_total" style="padding: 10px; font-weight: bold;">-->
+<!--                    Total Taxable Amount: <t t-esc="props.list.modelName"/>-->
+<!--                </div>-->
+<!--&lt;!&ndash;            </t>&ndash;&gt;-->
+<!--        </xpath>-->
+<!--    </t>-->
+</templates>

@@ -42,49 +42,51 @@ class Receipts(models.Model):
         month = today.month
 
         # Determine financial year
-        if month >= 4:  # April to December
+        if month >= 4:
             fy_start = year
             fy_end = year + 1
-        else:  # January to March
+        else:
             fy_start = year - 1
             fy_end = year
 
         fy_code = f"{fy_start}-{str(fy_end)[-2:]}"  # e.g., 2025-26
 
-        # Define prefixes
         prefixes = {
             'Cash': 'VXL',
             'Bank Direct': 'VXLBD',
             'Gateway': 'VXLBG'
         }
-        prefix = prefixes.get(payment_mode, 'VXLC')  # fallback
+        prefix = prefixes.get(payment_mode, 'VXLC')
 
-        # Determine search pattern and receipt format
         if payment_mode == 'Cash':
             search_pattern = f"{prefix}-{fy_code}/CR-%"
         else:
             search_pattern = f"{prefix}-{fy_code}/%"
 
-        # Search for last receipt
-        last_receipt = self.search(
-            [('receipt_no', 'like', search_pattern)],
-            order="receipt_no desc",
-            limit=1
+        # Search all matching receipts
+        matching_receipts = self.search(
+            [('receipt_no', 'like', search_pattern)]
         )
 
-        if last_receipt:
-            number_part = last_receipt.receipt_no.split("/")[-1]
-            if payment_mode == 'Cash':
-                number_part = number_part.replace("CR-", "")
-            last_number = int(number_part) + 1
-        else:
-            last_number = 1
+        max_number = 0
+        for rec in matching_receipts:
+            try:
+                number_part = rec.receipt_no.split("/")[-1]
+                if payment_mode == 'Cash':
+                    number_part = number_part.replace("CR-", "")
+                number = int(number_part)
+                if number > max_number:
+                    max_number = number
+            except Exception:
+                continue  # skip malformed receipt_no
 
-        # Format final receipt number
+        next_number = max_number + 1
+
+        # Return formatted receipt number
         if payment_mode == 'Cash':
-            return f"{prefix}-{fy_code}/CR-{str(last_number).zfill(3)}"
+            return f"{prefix}-{fy_code}/CR-{str(next_number).zfill(3)}"
         else:
-            return f"{prefix}-{fy_code}/{str(last_number).zfill(3)}"
+            return f"{prefix}-{fy_code}/{str(next_number).zfill(3)}"
 
     is_current_month = fields.Boolean(
         string='Is Current Month',
