@@ -16,6 +16,11 @@ class CreditNotes(models.Model):
     student_id = fields.Many2one('op.student', string="Student")
     refund_id = fields.Many2one('student.refund', string="Refund")
     refund_given_by = fields.Many2one('res.users', string="Refund Given By")
+    taxable_amount = fields.Float(string="Taxable Amount")
+    reason = fields.Text(string="Reason")
+    branch = fields.Char(string="Branch")
+    cgst_amount = fields.Float(string="CGST Amount")
+    sgst_amount = fields.Float(string="SGST Amount")
     currency_id = fields.Many2one(
         'res.currency', string='Currency',
         default=lambda self: self.env.user.company_id.currency_id.id)
